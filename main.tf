@@ -1,12 +1,58 @@
-provider "aws"
+provider "aws" {
  region ="us-east-1"
- access_key = "AKIARUMJ2LF6TAYXYB5N"
- secret_key = "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"
+ access_key = "AKIARUMJ2LF6TZZY6EI7"
+ secret_key = "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"
  }
  
  
+#Create security group with firewall rules
+resource "aws_security_group" "my_security_group" {
+  name        = var.security_group
+  description = "security group for Ec2 instance"
 
- resource "aws_instance" "My-First-Server" {
- ami = "ami-020db2c14939a8efb"
- instance_type = "t2.micro"
- }
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ # outbound from jenkis server
+  egress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags= {
+    Name = var.security_group
+  }
+}
+
+# Create AWS ec2 instance
+resource "aws_instance" "myFirstInstance" {
+  ami           = var.ami_id
+  key_name = var.key_name
+  instance_type = var.instance_type
+  security_groups= [var.security_group]
+  tags= {
+    Name = var.tag_name
+  }
+}
+
+# Create Elastic IP address
+resource "aws_eip" "myFirstInstance" {
+  vpc      = true
+  instance = aws_instance.myFirstInstance.id
+tags= {
+    Name = "my_elastic_ip"
+  }
+}
