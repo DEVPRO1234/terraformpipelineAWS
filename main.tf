@@ -40,10 +40,10 @@ resource "aws_security_group" "my_security_group" {
 # Create AWS ec2 instance
 resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
-  key_name = var.key_name
   instance_type = var.instance_type
   security_groups= [var.security_group]
-  tags= {
+  
+ tags= {
     Name = var.tag_name
   }
 }
@@ -52,7 +52,8 @@ resource "aws_instance" "myFirstInstance" {
 resource "aws_eip" "myFirstInstance" {
   vpc      = true
   instance = aws_instance.myFirstInstance.id
-tags= {
+
+ tags= {
     Name = "my_elastic_ip"
   }
 }
