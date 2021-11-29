@@ -1,6 +1,3 @@
-import jenkins.model.*
-jenkins = Jenkins.instance
-
 provider "aws" {
  region ="us-east-1"
  access_key = "AKIARUMJ2LF6TZZY6EI7"
