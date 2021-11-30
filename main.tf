@@ -1,8 +1,4 @@
-provider "aws" {
- region ="us-east-2"
- access_key = "AKIARUMJ2LF6TDDLVEVM"
- secret_key = "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"
- }
+
  
  
 #Create security group with firewall rules
