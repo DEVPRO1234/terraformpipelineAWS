@@ -1,8 +1,8 @@
 provider "aws"{
 
- access key =  var.access_key
- secret key  = var.secret_key
- region      = "us-esat-2"
+ A-KEY =  var.access_key
+ S-KEY = var.secret_key
+ region = "us-esat-2"
  
 }
  
