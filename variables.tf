@@ -1,14 +1,4 @@
-variable "access_key" {
 
-  default = "AKIARUMJ2LF6TDDLVEVM"
-
-}
-
-variable "secret_key" {
-
-  default = "ZlbfJD6RlO4FQ+fa7BxRQSkU/iUI/T6qL7P1exWH"
-
-}
 
 variable "instance_type" {
   description = "instance type for ec2"
